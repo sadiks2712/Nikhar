@@ -95,8 +95,23 @@ window.closeMobileMenu = () => {
   mobileLinks.classList.remove('active');
 };
 
+// Auth Guard Helper
+const checkAuth = () => {
+  if (!auth.currentUser) {
+    alert("Please sign in to continue shopping and access your cart!");
+    window.location.href = '/login.html';
+    return false;
+  }
+  return true;
+};
+
 // Navigation (SPA logic)
 window.navigate = (pageId) => {
+  // Guard sensitive pages
+  if (['cart', 'checkout', 'history'].includes(pageId)) {
+    if (!checkAuth()) return;
+  }
+
   window.scrollTo(0, 0);
   
   // Update active links
@@ -171,6 +186,8 @@ const productCardTemplate = (product) => `
 
 // Cart Logic
 window.addToCart = (productId) => {
+  if (!checkAuth()) return;
+
   const product = products.find(p => p.id === productId);
   if(!product) return;
 
