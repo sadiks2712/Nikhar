@@ -95,9 +95,15 @@ window.closeMobileMenu = () => {
   mobileLinks.classList.remove('active');
 };
 
+// Auth state tracker
+let currentUser = null;
+onAuthStateChanged(auth, (user) => {
+  currentUser = user; 
+});
+
 // Auth Guard Helper
 const checkAuth = () => {
-  if (!auth.currentUser) {
+  if (!currentUser) {
     alert("Please sign in to continue shopping and access your cart!");
     window.location.href = '/login.html';
     return false;
