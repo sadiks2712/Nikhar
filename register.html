@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nikhar Soap | Create Account</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
+    
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        overflow: hidden;
+      }
+      
+      .login-container {
+        width: 100%;
+        max-width: 480px;
+        position: relative;
+        z-index: 10;
+        animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      
+      @keyframes slideUp {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .login-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+        padding: 3rem 2.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+      
+      .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      
+      .login-header .logo {
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+      
+      .login-header h2 {
+        font-size: 1.5rem;
+        color: var(--text-main);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .login-header p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 1.25rem;
+      }
+
+      .form-group i {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        color: var(--text-light);
+        font-size: 1rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 1.1rem 1.1rem 1.1rem 3rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.8);
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        color: var(--text-main);
+        transition: all 0.3s;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+      }
+
+      .btn-login {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+      }
+
+      .login-footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .login-footer a {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* Animated absolute orbs for login background */
+      .bg-orb-1 {
+        position: absolute;
+        top: -5%;
+        right: 10%;
+        width: 350px;
+        height: 350px;
+        background: var(--primary);
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.4;
+        animation: drift 12s infinite alternate ease-in-out;
+        z-index: 1;
+      }
+      .bg-orb-2 {
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        width: 250px;
+        height: 250px;
+        background: var(--secondary);
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.3;
+        animation: drift 14s infinite alternate-reverse ease-in-out;
+        z-index: 1;
+      }
+      
+      @keyframes drift {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(-40px, 40px) scale(1.1); }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- Background Decor -->
+    <div class="bg-orb-1"></div>
+    <div class="bg-orb-2"></div>
+
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="logo">
+            <span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span>
+            <span class="logo-text">Nikhar</span>
+          </div>
+          <h2>Create Account</h2>
+          <p>Join us for natural and glowing skin</p>
+        </div>
+
+        <form id="register-form">
+          <div class="form-group">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="fullname" placeholder="Full Name" required>
+          </div>
+          
+          <div class="form-group">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" placeholder="Email Address" required>
+          </div>
+          
+          <div class="form-group">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" placeholder="Password (min 6 chars)" minlength="6" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-check"></i>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" minlength="6" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-login" id="register-btn">
+            Create Account
+          </button>
+          
+          <div class="divider" style="margin: 1.5rem 0; text-align: center; position: relative;">
+            <span style="background: rgba(255,255,255,0.85); padding: 0 10px; color: var(--text-light); z-index: 1; position: relative;">or</span>
+            <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: #e2e8f0; z-index: 0;"></div>
+          </div>
+
+          <button type="button" class="btn btn-outline btn-login" id="google-login-btn" onclick="loginWithGoogle()" style="margin-bottom: 0;">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" style="width: 20px; height: 20px; margin-right: 10px;">
+            Sign up with Google
+          </button>
+        </form>
+
+        <div class="login-footer">
+          Already have an account? <a href="/login.html">Sign In</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase Auth Script -->
+    <script type="module" src="/src/auth.js"></script>
+    <script>
+      document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return;
+        }
+
+        const btn = document.getElementById('register-btn');
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating...';
+        btn.disabled = true;
+
+        const email = document.getElementById('email').value;
+        
+        try {
+          await window.registerUser(email, password);
+          // Redirect handled inside auth.js 
+        } catch (err) {
+          // Reset button if error
+          btn.innerHTML = 'Create Account';
+          btn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

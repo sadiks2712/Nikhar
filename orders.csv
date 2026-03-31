@@ -1,0 +1,3 @@
+"orderId","name","phone","address","items","total","status","createdAt"
+"ORD-982131","Aarika Sharma","9876543210","123 Green Street, Mumbai, 400001","Neem & Basil (2), Rose & Almond (1)",350,"Pending","2026-03-31T11:02:58.472Z"
+"ORD-123456","Rohan Verma","8765432109","45 River View Apartments, Delhi, 110001","Turmeric & Sandalwood (1), Coconut & Cocoa (1)",540,"Shipped","2026-03-31T11:02:58.473Z"

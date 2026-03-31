@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nikhar Soap | Pure, Natural & Glowing Skin</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <div id="particle-container"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span>
+          <span class="logo-text" onclick="navigate('home')">Nikhar Soap</span>
+        </div>
+        <div class="nav-links">
+          <a class="nav-link active" data-target="home" onclick="navigate('home')">Home</a>
+          <a class="nav-link" data-target="products" onclick="navigate('products')">Shop</a>
+          <div class="nav-cart" onclick="navigate('cart')">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-badge" id="cart-badge">0</span>
+          </div>
+          <div id="nav-user-container" style="display: flex; align-items: center; margin-left: 1rem;">
+            <a href="/login.html" class="btn btn-outline" style="padding: 0.4rem 1.2rem; font-size: 0.9rem;">Sign In</a>
+          </div>
+        </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+      <!-- Mobile Links -->
+      <div class="mobile-links" id="mobile-links">
+        <a class="nav-link" data-target="home" onclick="navigate('home'); closeMobileMenu();">Home</a>
+        <a class="nav-link" data-target="products" onclick="navigate('products'); closeMobileMenu();">Shop</a>
+        <a class="nav-link" data-target="cart" onclick="navigate('cart'); closeMobileMenu();">Cart (<span id="mobile-cart-badge">0</span>)</a>
+      </div>
+    </nav>
+
+    <!-- Main Content App -->
+    <main id="app">
+      
+      <!-- HOME PAGE -->
+      <section id="page-home" class="page active">
+        <!-- Hero Section -->
+        <header class="hero">
+          <div class="hero-content">
+            <span class="badge">100% Organic & Handmade</span>
+            <h1>Discover the Purity of <br/><span class="text-gradient">Nature's Essence</span></h1>
+            <p>Handcrafted soaps made with pure essential oils, indigenous botanicals, and love. Reveal your skin's natural glow.</p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary" onclick="navigate('products')">Shop Collection</button>
+              <button class="btn btn-outline" onclick="scrollToAbout()">Our Story</button>
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div class="glass-orb orb-1"></div>
+            <div class="glass-orb orb-2"></div>
+            <!-- Mock up image container -->
+            <div class="hero-image-glass">
+              <img src="/hero_soap.png" alt="Natural Soaps" class="hero-img">            </div>
+          </div>
+        </header>
+
+        <!-- Featured Products (rendered by JS) -->
+        <section class="section">
+          <div class="section-header">
+            <h2>Bestselling <span class="text-gradient">Essentials</span></h2>
+            <p>Our customers' absolute favorites for a fresh, radiant skin.</p>
+          </div>
+          <div class="product-grid" id="featured-products-container">
+            <!-- Populated via JS -->
+          </div>
+          <div class="text-center mt-3">
+            <button class="btn btn-secondary" onclick="navigate('products')">View All Products</button>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section about-section" id="about-section">
+          <div class="about-grid">
+            <div class="about-image">
+              <img src="/about_soap.png" alt="Making soap">
+            </div>
+            <div class="about-content">
+              <span class="badge">Our Philosophy</span>
+              <h2>Crafted with <span class="text-gradient">Care and Tradition</span></h2>
+              <p>At Nikhar Soap, we believe that true beauty comes from nature. Our soaps are handcrafted in small batches using traditional cold-process methods to retain the natural glycerin and therapeutic properties of our cruelty-free ingredients.</p>
+              <ul class="features-list">
+                <li><i class="fa-solid fa-leaf text-primary"></i> 100% Vegan & Cruelty Free</li>
+                <li><i class="fa-solid fa-droplet text-primary"></i> No Paraben or Sulphates</li>
+                <li><i class="fa-solid fa-seedling text-primary"></i> Earth-friendly Packaging</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- PRODUCTS PAGE -->
+      <section id="page-products" class="page">
+        <div class="page-header">
+          <h1>Our <span class="text-gradient">Collection</span></h1>
+          <p>Explore our wide range of handcrafted natural soaps designed for every skin type.</p>
+        </div>
+        <div class="container">
+          <div class="product-grid" id="all-products-container">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- CART PAGE -->
+      <section id="page-cart" class="page">
+        <div class="page-header">
+          <h1>Your <span class="text-gradient">Cart</span></h1>
+        </div>
+        <div class="container cart-container">
+          <div class="cart-items-wrapper">
+            <div id="cart-items-container">
+              <!-- Cart Items Populated via JS -->
+            </div>
+            <div class="empty-cart-message" id="empty-cart-message">
+              <i class="fa-solid fa-cart-arrow-down empty-icon"></i>
+              <h3>Your cart is empty</h3>
+              <p>Looks like you haven't added any natural goodness to your cart yet.</p>
+              <button class="btn btn-primary" onclick="navigate('products')">Start Shopping</button>
+            </div>
+          </div>
+          <div class="cart-summary glass-card" id="cart-summary" style="display: none;">
+            <h3>Order Summary</h3>
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <span id="cart-subtotal">₹0</span>
+            </div>
+            <div class="summary-line">
+              <span>Shipping</span>
+              <span>₹50</span>
+            </div>
+            <div class="divider"></div>
+            <div class="summary-line total-line">
+              <span>Total</span>
+              <span id="cart-total" class="text-gradient">₹0</span>
+            </div>
+            <button class="btn btn-primary w-100 mt-2" onclick="navigate('checkout')">Proceed to Checkout</button>
+            <p class="secure-checkout mt-1"><i class="fa-solid fa-lock"></i> Secure Cash on Delivery</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHECKOUT PAGE -->
+      <section id="page-checkout" class="page">
+        <div class="page-header">
+          <h1>Complete <span class="text-gradient">Order</span></h1>
+        </div>
+        <div class="container checkout-container">
+          <div class="checkout-form glass-card">
+            <h3>Delivery Details</h3>
+            <form id="checkout-form">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required placeholder="9876543210" pattern="[0-9]{10}">
+              </div>
+              <div class="form-group">
+                <label for="address">Complete Address</label>
+                <textarea id="address" rows="3" required placeholder="House No, Street, City, Pincode"></textarea>
+              </div>
+              <div class="payment-method">
+                <p>Payment Method</p>
+                <div class="radio-box active">
+                  <input type="radio" checked id="cod" name="payment">
+                  <label for="cod">
+                    <i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery (COD)
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" id="place-order-btn">
+                Place Order (₹<span id="checkout-total">0</span>)
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUCCESS PAGE -->
+      <section id="page-success" class="page">
+        <div class="success-container">
+          <div class="success-icon">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+          <h1>Order <span class="text-gradient">Successful!</span></h1>
+          <p>Thank you for choosing Nikhar Soap. Your order has been placed successfully and will be delivered within 3-5 working days.</p>
+          <div class="order-details-box glass-card">
+            <p>Order ID: <span id="success-order-id" class="text-primary font-weight-bold">#ORD-123</span></p>
+            <p>Status: <strong>Processing</strong></p>
+          </div>
+          <button class="btn btn-primary mt-2" onclick="navigate('home')">Back to Home</button>
+        </div>
+      </section>
+
+      <!-- HISTORY PAGE -->
+      <section id="page-history" class="page">
+        <div class="page-header">
+          <h1>Order <span class="text-gradient">History</span></h1>
+          <p>Review your past purchases and track ongoing deliveries.</p>
+        </div>
+        <div class="container cart-container" style="display: block;">
+          <div class="cart-items-wrapper">
+            <div id="history-items-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span>
+            <span class="logo-text">Nikhar Soap</span>
+          </div>
+          <p>Bringing the purity of nature directly to your daily skincare routine. Handcrafted with love.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#" onclick="navigate('home')">Home</a></li>
+            <li><a href="#" onclick="navigate('products')">Shop</a></li>
+            <li><a href="#" onclick="scrollToAbout()">Our Story</a></li>
+            <li><a href="#" onclick="navigate('cart')">Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fa-solid fa-location-dot"></i> 123 Natural Avenue, Green City, India</p>
+          <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+          <p><i class="fa-solid fa-envelope"></i> hello@nikharsoap.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nikhar Soap. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

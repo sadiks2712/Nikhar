@@ -1,0 +1,19 @@
+{
+  "name": "nikhar-soap",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "firebase": "^12.11.0",
+    "firebase-admin": "^13.7.0",
+    "json2csv": "^6.0.0-alpha.2"
+  }
+}

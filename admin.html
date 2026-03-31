@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nikhar Soap | Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+      :root {
+        --primary: #10b981;
+        --primary-dark: #059669;
+        --bg-color: #f1f5f9;
+        --surface: #ffffff;
+        --text-main: #0f172a;
+        --text-light: #64748b;
+        --border: #e2e8f0;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --radius: 12px;
+      }
+      
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Outfit', sans-serif; background-color: var(--bg-color); color: var(--text-main); display: flex; min-height: 100vh; }
+      
+      /* Sidebar */
+      .sidebar {
+        width: 280px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .brand { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 3rem; }
+      .brand i { background: rgba(16, 185, 129, 0.1); padding: 0.5rem; border-radius: 8px; }
+      
+      .nav-menu { list-style: none; flex-grow: 1; }
+      .nav-item { margin-bottom: 0.5rem; }
+      .nav-link { 
+        display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 8px; text-decoration: none; color: var(--text-light); font-weight: 500; transition: all 0.2s;
+      }
+      .nav-link:hover, .nav-link.active { background: var(--primary); color: white; }
+      
+      /* Main Content */
+      .main-content {
+        flex-grow: 1;
+        padding: 2.5rem;
+        overflow-y: auto;
+      }
+      .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+      .header h1 { font-size: 2rem; }
+      .btn { padding: 0.8rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s; }
+      .btn:hover { background: var(--primary-dark); }
+      
+      /* Dashboard Cards */
+      .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+      .stat-card { background: var(--surface); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+      .stat-card h3 { color: var(--text-light); font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+      .stat-card .value { font-size: 2rem; font-weight: 700; color: var(--text-main); }
+      
+      /* Table container */
+      .table-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+      .table-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+      .table-header h2 { font-size: 1.25rem; }
+      
+      table { width: 100%; border-collapse: collapse; text-align: left; }
+      th { background: #f8fafc; padding: 1rem 1.5rem; font-weight: 600; color: var(--text-light); border-bottom: 1px solid var(--border); }
+      td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); color: var(--text-main); vertical-align: middle; }
+      tr:last-child td { border-bottom: none; }
+      tr:hover { background: #f8fafc; }
+      
+      .status { padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; display: inline-block; }
+      .status.pending { background: #fef3c7; color: #d97706; }
+      .status.shipped { background: #dcfce3; color: #15803d; }
+      
+      /* Sidebar Profile Block */
+      .sidebar-profile {
+        margin-top: auto;
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+      }
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      .profile-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+      .profile-info { flex-grow: 1; overflow: hidden; }
+      .profile-name { font-weight: 600; font-size: 0.95rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .profile-email { font-size: 0.8rem; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      
+      .btn-logout {
+        background: transparent;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-logout:hover { background: #fee2e2; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <i class="fa-solid fa-leaf"></i> Nikhar Admin
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link active"><i class="fa-solid fa-chart-pie"></i> Orders</a>
+        </li>
+        <li class="nav-item">
+          <a href="/" class="nav-link"><i class="fa-solid fa-store"></i> Live Store</a>
+        </li>
+      </ul>
+      
+      <!-- Profile Widget -->
+      <div class="sidebar-profile">
+        <div class="profile-avatar" id="admin-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name" id="admin-name">Loading...</div>
+          <div class="profile-email" id="admin-email">Verifying session</div>
+        </div>
+        <button class="btn-logout" title="Logout" onclick="logoutUser()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <h1>Orders Dashboard</h1>
+        <button class="btn" id="export-csv-btn">
+          <i class="fa-solid fa-download"></i> Download CSV
+        </button>
+      </header>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Revenue</h3>
+          <div class="value" id="stat-revenue">₹0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Total Orders</h3>
+          <div class="value" id="stat-orders">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Pending COD</h3>
+          <div class="value" id="stat-pending">0</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-header">
+          <h2>Recent Orders</h2>
+        </div>
+        <div style="overflow-x:auto;">
+          <table id="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="margin-top:20px; color:#64748b; font-size:0.9rem;">
+        <i class="fa-solid fa-circle-info"></i> Note: For local preview purposes, this dashboard runs the backend Node CSV process from the browser. In production, this syncs with Firebase.
+      </p>
+    </main>
+    
+    <!-- Admin Scripts -->
+    <script type="module" src="/src/admin.js"></script>
+  </body>
+</html>
